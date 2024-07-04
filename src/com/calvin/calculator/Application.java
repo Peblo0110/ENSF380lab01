@@ -38,6 +38,13 @@ public class Application {
 	                case "pow":
 	                    System.out.println("Result: " + power(num1, num2));
 	                    break;
+	                case "perm":
+	                	int res = permutations((int) num1,(int) num2);
+	                	if(res == -1) {
+	                		break;
+	                	}
+	                	System.out.println("Result: " + res);
+	                	break;
 	                default:
 	                    System.out.println("Invalid operation.");
 	                    break;
@@ -142,5 +149,35 @@ public class Application {
     // Tangent function
     public static double tan(double angleRadians) {
         return Math.tan(angleRadians);
+    }
+    
+    //Permutations
+    public static int permutations(int elements, int select) {
+    	
+    	if(select == 1) {
+    		return elements;
+    	}
+    	else if(elements > 100) {
+    		System.out.println("Too many elements!");
+    		return -1;
+    	}
+    	else if(elements < 0) {
+    		System.out.println("Elements cannot be negative");
+    		return -1;
+    	}
+    	else if(select > elements) {
+    		System.out.println("Selection can not exceed elements");
+    		return -1;
+    	}
+    	
+    	//calculation
+    	return elements * permutations(elements-1, select-1);
+    }
+    //Permutation second solution
+    public static int permuations(int elements, int select, boolean b) {
+    	int upper, lower;
+    	upper = (int) factorial(elements);
+    	lower = (int) factorial(elements-select);
+    	return (int) upper/lower;
     }
 }
